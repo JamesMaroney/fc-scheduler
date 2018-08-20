@@ -47,8 +47,8 @@ a[disabled] { opacity: 0.5; pointer-events: none; }
 #left-rail .scheduled {background: #f0f0f0;border-bottom: 1px solid #d0d0d0;}
 #left-rail h3 {margin: 0;padding: .5em 0.8em 0;font-size: 0.8em;font-weight: bold; color: #333;text-shadow: 0 0 1px #fff;}
 #left-rail .criteria { margin-right: 1em; }
-#left-rail .is-match::after { content: '✓'; color: #006400; }
-#left-rail .is-mismatch::after { content: '×'; color: #B22222; font-size: 1.5em; }
+#left-rail .is-match::after { content: '\2713'; color: #006400; }
+#left-rail .is-mismatch::after { content: '\D7'; color: #B22222; font-size: 1.5em; }
 #left-rail .matches { background: #fafafa; padding-bottom: .2em; }
 #left-rail h2 .pairing { font-size: .6em; }
 #left-rail form { padding: .5em 0.3em; }
@@ -209,3 +209,74 @@ td i { color: #999; }
 .person-details nav { display: flex; flex-direction: row;}
 .person-details nav a {color: #999;text-decoration: none;flex: 1;text-align: center;font-weight: bold;font-size: 0.9em;padding: 0.65em 0 0 0;display: inline-block; }
 .person-details nav a.active { color: #333 }
+
+@font-face {
+  font-family: 'friendship-circle';
+  src: url(64ec894cb870518fd2a36cb78976cb13.eot);
+  src: url(64ec894cb870518fd2a36cb78976cb13.eot#iefix) format('embedded-opentype'),
+       url(6e498260e418d611d10628c184c21993.woff2) format('woff2'),
+       url(0705faaacbea619782c25c653c4d5ca5.woff) format('woff'),
+       url(a0fb202ac90c1b16b3ba693c4a70fefe.ttf) format('truetype'),
+       url(48a247b93654de9dba2ed7249f5dc6b6.svg#friendship-circle) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'friendship-circle';
+    src: url('../font/friendship-circle.svg?698650#friendship-circle') format('svg');
+  }
+}
+*/
+ 
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "friendship-circle";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-phone:before { content: '\E800'; } /* '' */
+.icon-mobile:before { content: '\E801'; } /* '' */
+.icon-mail:before { content: '\E802'; } /* '' */
+.icon-cancel:before { content: '\E803'; } /* '' */
+.icon-star-empty:before { content: '\E804'; } /* '' */
+.icon-left-open-big:before { content: '\E805'; } /* '' */
+.icon-pencil:before { content: '\E806'; } /* '' */
+.icon-plus-circled:before { content: '\E807'; } /* '' */
+.icon-calendar:before { content: '\E808'; } /* '' */
+.icon-distance:before { content: '\E809'; } /* '' */
+.icon-hash:before { content: '\F029'; } /* '' */
+.icon-folder-open-empty:before { content: '\F115'; } /* '' */
+.icon-gender:before { content: '\F224'; } /* '' */
