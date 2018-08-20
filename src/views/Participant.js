@@ -3,29 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-var colorMap = {
-    'participant': '#f05163',
-    'volunteer': '#4a82f7'
-};
-
-function icon(type, label){
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="27" height="27"><circle cx="13" cy="13" r="12" stroke="#333" fill="'+colorMap[type]+'"/><text x="13" y="14" text-anchor="middle" alignment-baseline="middle" style="text-shadow:0 0 5px #333" fill="#fff" font-family="Arial" font-size="12">'+label+'</text></svg>'
-}
-
-/*
-const dayMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-function nums2days(nums){
-    return nums.map( n=> dayMap[n] ).join(', ')
-}
-*/
-
-const num2time = function(num){
-    let hr = Math.trunc(num) % 12,
-        min = '00' + Math.trunc((num % 1) * 60);
-    if(hr==0) hr = 12;
-    return `${hr}:${min.slice(-2)}`
-}
-export {num2time};
+import AddScheduleForm from './components/AddScheduleForm.js';
+import AddRemoveVolunteerForScheduleEntryForm from './components/AddRemoveVolunteerForScheduleEntryForm.js';
+import { icon, num2time } from '../utils.js';
 
 function setVoiceOverFocus(element) {
   var focusInterval = 10; // ms, time between function calls
@@ -164,12 +144,12 @@ class Participant extends Component {
                 <div id="left-rail">
                     <h1 className='offscreen'>Participant Scheduling</h1>
                     <header>
+                        <Link to='/scheduler' className="back" title='Back to Main Page'><span aria-hidden>❮</span></Link>
                         <div className="person participant">
                             <span className="badge" aria-hidden>{participant.initials}</span>
                             <span className="name">{participant.firstName} {participant.lastName}</span>
                             <span className="clear"></span>
                         </div>
-                        <Link to='/scheduler' className="back" title='Back to Main Page'><span aria-hidden>❮</span></Link>
                     </header>
                     <div className="person-details" role='tabpanel'>
                         <nav role='tablist'>
@@ -286,12 +266,12 @@ class Participant extends Component {
                     { volunteer &&
                         <React.Fragment>
                             <header>
+                                <Link to={{pathname: '/scheduler/participant', state: {participant}}}
+                                      className="back" title='Back to Volunteer List'><span aria-hidden>❮</span></Link>
                                 <div className="person volunteer">
                                     <span className="badge" aria-hidden>{volunteer.initials}</span>
                                     <span className="name">{volunteer.firstName} {volunteer.lastName}</span>
                                 </div>
-                                <Link to={{pathname: '/scheduler/participant', state: {participant}}}
-                                      className="back" title='Back to Volunteer List'><span aria-hidden>❮</span></Link>
                             </header>
                             <div className="person-details" role='tabpanel'>
                                 <nav role='tablist'>
@@ -453,33 +433,11 @@ class Participant extends Component {
 
                             <h2>Scheduling</h2>
 
-                            {participantScheduledTimes.map((t, i) =>
-                                <form className='add-to-existing' key={i}>
-                                    {t.day}
-                                    <span aria-label='Start time'> {num2time(t.startTime)}</span>
-                                    <span aria-hidden> - </span>
-                                    <span aria-label='End Time'>{num2time(t.endTime)}</span>
-                                    {t.volunteers.map( (v)=>
-                                        <span key={v.initials} className="badge volunteer" title={`${v.firstName} ${v.lastName}`}><span aria-hidden>{v.initials}</span></span>
-                                    )}
-                                    {t.volunteers.some( v=> v.id == volunteer.id)
-                                        && <button className='remove'>Remove</button>
-                                        || <button className='add'>Add</button>}
-                                </form>
+                            {participantScheduledTimes.map((entry, i) =>
+                                <AddRemoveVolunteerForScheduleEntryForm volunteer={volunteer} entry={entry} key={i}/>
                             )}
 
-                            <form className='add-new'>
-                                <select>
-                                    { Object.keys(timeslots).map( (d, i)=>
-                                        <option value={i} key={i}>{d.slice(0,3)}</option>
-                                    )}
-                                </select>&nbsp;
-                                <input type='time' /> - <input type='time' />
-                                <footer>
-                                <button>Add</button>
-                                </footer>
-
-                            </form>
+                            <AddScheduleForm participant={participant} volunteer={volunteer} />
                         </React.Fragment>
                     }
 

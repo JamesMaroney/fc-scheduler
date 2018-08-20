@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { num2time } from './Participant.js'
+import { num2time } from '../utils.js';
 
 class Participants extends Component {
 

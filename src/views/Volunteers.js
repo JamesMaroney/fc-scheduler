@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { num2time } from './Participant.js'
+import { num2time } from '../utils.js';
 
 class Volunteers extends Component {
 
@@ -50,7 +50,7 @@ class Volunteers extends Component {
                 <tbody>
                 { this.props.volunteers.map( v=>
                     <tr key={v.id}>
-                        <td>{v.firstName} {v.lastName}</td>
+                        <th scope='row'>{v.firstName} {v.lastName}</th>
                         <td>{v.addr} {v.city}, {v.state} {v.zip}</td>
 
                         <td>{v.phone}</td>

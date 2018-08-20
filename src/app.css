@@ -38,8 +38,8 @@ a[disabled] { opacity: 0.5; pointer-events: none; }
 #home a:focus::before,
 #home a:hover::before { color: #fff; }
 
-#left-rail {width: 300px;display: flex;flex-direction: column;align-content: flex-start;position: relative;z-index: 1;overflow: hidden;}
-#left-rail header {padding: 0.5em .75em;background: #46b5da;position:relative;white-space: nowrap;    display: flex; flex-direction: row; align-items: center;}
+#left-rail {width: 300px;display: flex;flex-direction: column;align-content: flex-start;position: relative;z-index: 1;overflow-x: hidden; overflow-y: auto;}
+#left-rail header {padding: 0.5em .75em;background: #46b5da;position:relative;white-space: nowrap;}
 #left-rail ul { margin: 0; padding: 0; list-style: none; }
 #left-rail .person-list {flex: 1;display: flex;flex-direction: column;}
 #left-rail .person-list .list {flex: 1;overflow: auto;}
@@ -54,9 +54,10 @@ a[disabled] { opacity: 0.5; pointer-events: none; }
 #left-rail form { padding: .5em 0.3em; }
 #left-rail form footer { padding: .5em 0; text-align: right; }
 
-form.add-to-existing button { float: right; }
+form.modify-existing button { float: right; }
+form.modify-existing .badge { vertical-align: baseline; margin-left: .5em;}
 
-.scheduled-times .badge { float: none; display: inline-block; vertical-align: middle; margin: 0 .2em;}
+.scheduled-times .badge { vertical-align: baseline; margin-left: .5em;}
 
 header .back {
     text-decoration: none;
@@ -68,7 +69,8 @@ header .back {
     background-position: top right;
     background-size: 3px 8px;
     background-repeat: repeat-y;
-    order:1;
+    display: inline-block;
+    vertical-align: middle;
 }
 h2 {
     padding: .35em 1.5em .25em;
@@ -82,7 +84,7 @@ h2 {
     width: calc(100% - 1em);
     box-sizing: content-box;
     z-index: 1;
-    }
+}
 
 .inset { position: relative; overflow: hidden; }
 .inset::before {
@@ -117,7 +119,7 @@ button { padding: .5em 1em; background: #503291; color: #fff; font-weight: bold;
 button.remove { background: #b22222; }
 
 #left-rail .person {margin: .5em;cursor: pointer;user-select: none;white-space: nowrap;}
-#left-rail header .person {color: #fff;text-shadow: 0 0 3px #444;display: inline-block;vertical-align: middle; order: 2;}
+#left-rail header .person {color: #fff;text-shadow: 0 0 3px #444;display: inline-block;vertical-align: middle;}
 .badge {
     border-radius: 2em;color: #FFF;font-weight: bold;font-family: Arial;font-size: .75em; text-shadow: 0 0 5px #333; display: inline-block;
     border: 1px solid #333;width: 2.3em;height: 2.3em;text-align: center;vertical-align: middle;line-height: 2.3em;position: relative;}
